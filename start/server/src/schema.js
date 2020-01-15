@@ -36,6 +36,26 @@ const typeDfs = gql`
         SMALL
         LARGE
     }
+
+        # Query can query data but not modify it
+    type Query {
+        launches: [Launch]!
+        launch(id: ID!): Launch
+        me: User
+    }
+
+        # Mutation is making able to modify data
+    type Mutation {
+        bookTrips(launchIds: [ID]!): TripUpdateResponse!
+        cancelTrip(launchId: ID!): TripUpdateResponse!
+        login(email: String): String        # login token
+    }
+
+    type TripUpdateResponse {
+        success: Boolean!
+        message: String
+        launches: [Launch]
+    }
 `;
 
 module.exports = typeDfs; 
